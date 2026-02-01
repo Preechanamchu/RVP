@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AVA - ระบบตรวจสอบผู้บาดเจ็บจากอุบัติเหตุ บริษัทกลางคุ้มครองผู้ประสบภัย">
+    <meta name="author" content="บริษัทกลางคุ้มครองผู้ประสบภัยจากรถ จำกัด">
+
+    <title>AVA | Accident Verification Authority</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="LOGO.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/mediaViewer.css">
+
+    <style>
+        /* Initial loading state */
+        .initial-loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+            z-index: 9999;
+        }
+
+        .initial-loader img {
+            height: 150px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .initial-loader p {
+            color: white;
+            font-size: var(--font-size-sm);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(0.95);
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Initial Loader -->
+    <div class="initial-loader" id="initialLoader">
+        <img src="LOGO.png" alt="AVA Logo">
+        <p>กำลังโหลดระบบ...</p>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app"></div>
+
+    <!-- JavaScript Files -->
+    <!-- Config & Utils -->
+    <script src="js/config.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/thailandGeoData.js"></script>
+    <script src="js/utils/thailandSubdistricts.js"></script>
+
+    <!-- Database Layer -->
+    <script src="js/db/indexedDB.js"></script>
+    <script src="js/services/auditService.js"></script>
+    <script src="js/db/dataService.js"></script>
+
+    <!-- Auth -->
+    <script src="js/auth/authService.js"></script>
+    <script src="js/auth/rbac.js"></script>
+
+    <!-- Third-party Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- OCR (Tesseract.js) สำหรับอ่านข้อมูลจากเอกสาร -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+    <!-- Components -->
+    <script src="js/components/icons.js"></script>
+    <script src="js/components/modal.js"></script>
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/mediaUpload.js"></script>
+    <script src="js/components/mediaViewer.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/ocrService.js"></script>
+
+    <!-- Pages -->
+    <script src="js/pages/login.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+    <script src="js/pages/cases/list.js"></script>
+    <script src="js/pages/cases/drafts.js"></script>
+    <script src="js/pages/cases/create.js"></script>
+    <script src="js/pages/cases/detail.js"></script>
+    <script src="js/pages/cases/inspect.js"></script>
+    <script src="js/pages/cases/review.js"></script>
+    <script src="js/pages/reports/analytics.js"></script>
+    <script src="js/pages/reports/monthly.js"></script>
+    <script src="js/pages/reports/performance.js"></script>
+    <script src="js/pages/reports/staffActivity.js"></script>
+    <script src="js/pages/users/list.js"></script>
+    <script src="js/pages/audit/logs.js"></script>
+    <script src="js/pages/account.js"></script>
+    <script src="js/pages/settings.js"></script>
+
+    <!-- Main App -->
+    <script src="js/app.js"></script>
+
+    <script>
+        // Hide initial loader when app is ready
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('initialLoader').style.display = 'none';
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>
