@@ -1,0 +1,30 @@
+{
+  "name": "ava-system",
+  "version": "1.0.0",
+  "description": "AVA - Accident Verification Authority System",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "keywords": [
+    "accident",
+    "verification",
+    "insurance",
+    "thailand"
+  ],
+  "author": "AVA Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

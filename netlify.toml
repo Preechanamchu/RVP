@@ -1,0 +1,76 @@
+# ══════════════════════════════════════════════════════════════════════════
+# AVA System - Netlify Configuration
+# ══════════════════════════════════════════════════════════════════════════
+
+[build]
+  # Directory to publish (static files)
+  publish = "."
+  
+  # Functions directory
+  functions = "netlify/functions"
+  
+  # Build command (none needed for static site)
+  command = "echo 'Build complete'"
+
+[functions]
+  # Functions configuration
+  node_bundler = "esbuild"
+  
+  # Included files for functions
+  included_files = ["netlify/functions/**"]
+
+# ══════════════════════════════════════════════════════════════════════════
+# API Redirects - Route /api/* to Netlify Functions
+# ══════════════════════════════════════════════════════════════════════════
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# ══════════════════════════════════════════════════════════════════════════
+# Headers - Security and CORS
+# ══════════════════════════════════════════════════════════════════════════
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Content-Type = "application/json; charset=utf-8"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# ══════════════════════════════════════════════════════════════════════════
+# SPA Fallback - All routes go to index.html
+# ══════════════════════════════════════════════════════════════════════════
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+  force = false
+
+# ══════════════════════════════════════════════════════════════════════════
+# Environment Variables (set these in Netlify Dashboard)
+# ══════════════════════════════════════════════════════════════════════════
+# DATABASE_URL = "postgresql://user:password@host/database?sslmode=require"
+# JWT_SECRET = "your-super-secret-jwt-key-min-32-chars"
+# JWT_EXPIRES_IN = "24h"
+
+# ══════════════════════════════════════════════════════════════════════════
+# Development Settings
+# ══════════════════════════════════════════════════════════════════════════
+
+[dev]
+  port = 8888
+  targetPort = 3000
+  autoLaunch = false
+  framework = "#static"
